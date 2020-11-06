@@ -24,9 +24,8 @@ class ContactsPage(TestCommon):
     def __init__(self, driver):
         super(ContactsPage, self).__init__(driver)
         self.driver = driver
-        self.wait_for_element(By.CSS_SELECTOR, self.CONTACT_FORM)
+        self.contact_form = self.find_element(By.CSS_SELECTOR, self.CONTACT_FORM)
 
-        self.contact_form = self.driver.find_element_by_css_selector(self.CONTACT_FORM)
         self.name_text_box = self.contact_form.find_element_by_css_selector(self.FIRSTNAME_TEXT_BOX)
         self.surname_text_box = self.contact_form.find_element_by_css_selector(self.LASTNAME_TEXT_BOX)
         self.email_text_box = self.contact_form.find_element_by_css_selector(self.EMAIL_TEXT_BOX)
