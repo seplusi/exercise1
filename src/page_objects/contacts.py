@@ -1,24 +1,38 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from src.common.test_common import TestCommon
+from src.common.base_page import BasePage
+from src.common.locators import Locators
 
 
-class ContactsPage(TestCommon):
+class ContactsPage(BasePage):
     """
-        Page object that represents the page with the conversion result
+        Page object that represents the contacts page
     """
 
-    CONTACT_FORM = "section.has_ae_slider.ob-is-breaking-bad[data-settings*='{\"backgr']"
-    FIRSTNAME_TEXT_BOX = "input.hs-input[name=\"firstname\"]"
-    LASTNAME_TEXT_BOX = "input.hs-input[name=\"lastname\"]"
-
-    def __init__(self, driver):
+    def __init__(self, driver, *args):
         super(ContactsPage, self).__init__(driver)
         self.driver = driver
-        self.wait_for_element(By.CSS_SELECTOR, self.CONTACT_FORM)
+        self.contact_form = self.wait_find_element(Locators.CONTACT_FORM)
 
-        self.contact_form = self.driver.find_element_by_css_selector(self.CONTACT_FORM)
-        self.name_text_box = self.contact_form.find_element_by_css_selector(self.FIRSTNAME_TEXT_BOX)
-        self.surname_text_box = self.contact_form.find_element_by_css_selector(self.LASTNAME_TEXT_BOX)
-        print("fghjk")
+    def fill_contact_form(self, *args):
+        """
+            Fills the contact form
+
+        :param args: List of Strings to be written in the contact form
+        :return: None
+        """
+        self.contact_form.find_element(*Locators.FIRSTNAME_TEXT_BOX).send_keys(args[0])
+        self.contact_form.find_element(*Locators.LASTNAME_TEXT_BOX).send_keys(args[1])
+        self.contact_form.find_element(*Locators.EMAIL_TEXT_BOX).send_keys(args[2])
+        self.contact_form.find_element(*Locators.COMPANY_TEXT_BOX).send_keys(args[3])
+        self.contact_form.find_element(*Locators.PHONE_TEXT_BOX).send_keys(args[4])
+        self.contact_form.find_element(*Locators.MESSAGE_TEXT_BOX).send_keys(args[5])
+
+    def send_request(self):
+        """
+            Accepts the terms & conditions and submits the request form
+
+        :return: None
+        """
+        self.contact_form.find_element(*Locators.AGREEMENT_BOX).click()
+        self.contact_form.find_element(*Locators.SEND_REQUEST_BUTTON).click()
+
+        return self.driver.find_element(*Locators.SUBMITED_MSG).text

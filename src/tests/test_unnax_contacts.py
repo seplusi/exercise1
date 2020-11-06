@@ -1,5 +1,4 @@
 import unittest
-import time
 from src.page_objects.contacts import ContactsPage
 from src.common.chromedriver_obj import Driver
 
@@ -7,7 +6,7 @@ from src.common.chromedriver_obj import Driver
 chromedriver_path = '/home/luis/Programs/chromedriver/chromedriver'
 
 
-class TestCurrencyConverter(unittest.TestCase):
+class TestUnnaxContactForm(unittest.TestCase):
     """A sample test class to show how page object works"""
 
     driver = None
@@ -19,9 +18,10 @@ class TestCurrencyConverter(unittest.TestCase):
     def setUp(self):
         self.driver.navigate("https://www.unnax.com/contact/")
 
-    def test1(self):
-        ContactsPage(self.driver.instance)
-        pass
+    def test_submiting_contact_form(self):
+        contacts_page = ContactsPage(self.driver.instance)
+        contacts_page.fill_contact_form('test', 'test', 'seplusi@gmail.com', 'test', '012345678', 'test')
+        assert(contacts_page.send_request() == "Thanks, we will be in touch shortly.")
 
     def tearDown(self):
         pass
