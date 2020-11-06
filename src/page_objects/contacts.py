@@ -26,11 +26,11 @@ class ContactsPage(TestCommon):
         self.driver = driver
         self.contact_form = self.find_element(By.CSS_SELECTOR, self.CONTACT_FORM)
 
-        self.name_text_box = self.contact_form.find_element_by_css_selector(self.FIRSTNAME_TEXT_BOX)
-        self.surname_text_box = self.contact_form.find_element_by_css_selector(self.LASTNAME_TEXT_BOX)
-        self.email_text_box = self.contact_form.find_element_by_css_selector(self.EMAIL_TEXT_BOX)
-        self.company_text_box = self.contact_form.find_element_by_css_selector(self.COMPANY_TEXT_BOX)
-        self.phone_text_box = self.contact_form.find_element_by_css_selector(self.PHONE_TEXT_BOX)
+        #self.name_text_box = self.contact_form.find_element_by_css_selector(self.FIRSTNAME_TEXT_BOX)
+        #self.surname_text_box = self.contact_form.find_element_by_css_selector(self.LASTNAME_TEXT_BOX)
+        #self.email_text_box = self.contact_form.find_element_by_css_selector(self.EMAIL_TEXT_BOX)
+        #self.company_text_box = self.contact_form.find_element_by_css_selector(self.COMPANY_TEXT_BOX)
+        #self.phone_text_box = self.contact_form.find_element_by_css_selector(self.PHONE_TEXT_BOX)
         
     def send_request(self, *args):
         for index in range(0, len(self.LIST_CONTACT_FORM_SELECTOR)):
