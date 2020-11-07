@@ -35,4 +35,4 @@ class ContactsPage(BasePage):
         self.contact_form.find_element(*Locators.AGREEMENT_BOX).click()
         self.contact_form.find_element(*Locators.SEND_REQUEST_BUTTON).click()
 
-        return self.driver.find_element(*Locators.SUBMITED_MSG).text
+        return self.wait_find_element(Locators.SUBMITED_MSG).text
